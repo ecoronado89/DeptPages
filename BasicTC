@@ -1,0 +1,76 @@
+package com.promos;
+
+import static org.junit.Assert.*;
+
+import java.util.NoSuchElementException;
+import java.util.concurrent.TimeUnit;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class BasicTC {
+
+	//public static WebDriverWait wait;
+	public static WebDriver driver;
+	private static String baseUrl;
+	private static StringBuffer verificationErrors = new StringBuffer();
+
+	
+	@BeforeClass
+	public static void setUp() throws Exception
+	{
+	
+		System.setProperty("webdriver.chrome.driver", "C://Program Files (x86)//Google//Chrome//Application//chromedriver.exe");
+		driver = new ChromeDriver();
+		baseUrl = "http://ecwebs01.llbean.com";
+		driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
+	}
+	
+	
+	@Test
+	public void testMethod() throws InterruptedException
+	{
+
+	driver.get(baseUrl);
+
+	
+	//element = driver.findElement(By.xpath("id('nommkidstest')/x:a[1]/x:img"));
+	//assertTrue(element.isDisplayed() == true);
+	//try {
+		driver.findElement(By.id("dp-26")).click();
+		driver.wait(120);
+		//assertTrue(findElement(By.xpath("id('nommkidstest')/x:a[1]/x:img")));
+		
+	//} catch (Error e) {
+	//	verificationErrors.append(e.toString());
+	//}
+	}
+
+	@AfterClass
+	public static void tearDown() throws Exception {
+		driver.quit();
+		String verificationErrorString = verificationErrors.toString();
+		if (!"".equals(verificationErrorString)) {
+			fail(verificationErrorString);
+		}
+	}	
+	
+	
+	private boolean findElement(By xpath) {
+		// TODO Auto-generated method stub
+		try {
+			driver.findElement(xpath);
+			return true;
+		} catch (NoSuchElementException e) {
+			return false;
+		}
+	}
+
+
+	
+	
+}
