@@ -3,13 +3,14 @@ package com.TestNGTest;
 
 import org.testng.annotations.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 public class TestNGTest extends Util.Packages {
 	
 	Boolean Available = false;
   
-  @Test 
-  public void main(){
+ @Test 
+public void main(){
 	  
 	try{  
 			  	
@@ -39,12 +40,13 @@ public class TestNGTest extends Util.Packages {
 public void ValidName(){
 	
 	Available = Util.Packages.isElementPresent(driver, By.xpath("id('ppName')"));
-	
+	WebElement Name = driver.findElement(By.xpath("id('ppName')"));
+	String HName = Name.getText();
 	try{
 		
 		if(Available = true)
 		{
-			System.out.println("VALID NAME FIND");
+			System.out.println("VALID NAME FIND: " + HName);
 		}
 		else{
 			System.out.println("INVALID NAME");
