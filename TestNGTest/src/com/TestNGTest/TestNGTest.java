@@ -5,31 +5,24 @@ import org.testng.annotations.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import org.testng.Assert;
+
 public class TestNGTest extends Util.Packages {
 	
 	Boolean Available = false;
   
  @Test 
-public void main(){
+public void ValidatePromo(){
 	  
 	try{  
 			  	
 		driver.findElement(By.xpath("id('swatch1_0_0')")).click();
 		driver.findElement(By.xpath("id('ShoeSize1_0_0')")).click();
-		driver.findElement(By.xpath("id('ppAddToBagBtn_0')")).click();
-	   
-		  
-		//check if the popup is displayed
-		Available = Util.Packages.isElementPresent(driver, By.xpath("id('ui-dialog-title-1')"));
-		
-		if(Available = true)
-		{
-		  System.out.println("ELEMENT FIND");
+		driver.findElement(By.xpath("id('ppAddToBagBtn_0')")).click();	   	  
+	
+		WebElement Temp = driver.findElement(By.xpath("//*[@id='alternateProductPage']/div[4]/div[2]/div[4]/div/button[2]"));
+		Temp.click();
 
-		}
-		else{
-		  System.out.println("ELEMENT NOT FIND"); 
-		}
 				
 		} catch (Error e){
 		  verificationErrors.append(e.toString());
@@ -56,6 +49,7 @@ public void ValidName(){
 	  verificationErrors.append(e.toString());
 	}
 }
+
 
 @Test
 public void SizeChart(){
