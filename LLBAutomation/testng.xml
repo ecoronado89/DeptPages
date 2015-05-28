@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="AutomatedTestSuite" parallel="classes" verbose="3"
+	data-provider-thread-count="3">
+	<test name="AutomatedTest" preserve-order="true" enabled="true">
+		<parameter name="automationfile" value="automation.properties" />
+		<groups>
+			<define name="fullRegression">
+				<include name="smoke" />
+				<include name="regression" />
+			</define>
+			<run>
+				<include name="fullRegression" />
+				<exclude name="brokenTests" />
+			</run>
+		</groups>
+		<packages>
+			<package name="ProductPages" />
+		</packages>
+	</test> <!-- Test -->
+</suite> <!-- Suite -->
