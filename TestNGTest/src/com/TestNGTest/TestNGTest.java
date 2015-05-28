@@ -19,7 +19,7 @@ public void main(){
 		driver.findElement(By.xpath("id('ppAddToBagBtn_0')")).click();
 	   
 		  
-		
+		//check if the popup is displayed
 		Available = Util.Packages.isElementPresent(driver, By.xpath("id('ui-dialog-title-1')"));
 		
 		if(Available = true)
