@@ -1,6 +1,7 @@
 package Util;
 
 import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -12,6 +13,7 @@ public class Packages {
 
 	public static WebDriver driver;
 	public static String baseUrl;
+	public static String promocode;
 	public static StringBuffer verificationErrors = new StringBuffer();
 
 	
@@ -21,8 +23,9 @@ public class Packages {
 		System.setProperty("webdriver.chrome.driver", "C:/Program Files (x86)/Google/Chrome/Application/chromedriver.exe");
 		driver = new ChromeDriver(DesiredCapabilities.chrome());
 		baseUrl = "http://ecwebs01.llbean.com/llb/shop/";
+		promocode = "?pcd=HRB4MWV6G";
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		driver.get(baseUrl + "87004");
+		driver.get(baseUrl + "82289" + promocode);
 	  
   }
   
