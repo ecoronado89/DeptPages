@@ -3,21 +3,23 @@ package ProductPages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import org.openqa.selenium.JavascriptExecutor;
+
+import com.jayway.restassured.specification.RequestSpecification;
 
 import Utils.Utils;
 
 public class BasicTC extends TestCase{
-
+	private RequestSpecification requestSpecification;//DO NOT MOVE THIS
 	
 	@Test (groups = {"smoke"})
 	public void verifyCurrentPage()
 	{
 		StringBuilder verifyResults = new StringBuilder();
 
-		Utils.goToProductPage((WebDriver)driver, "32711");
+		//Utils.goToProductPage((WebDriver)driver, "32711");
 		
 		//if page is available
 		Utils.assertSoft(!driver.getTitle().equalsIgnoreCase("L.L.Bean: Page Not Available"), "The Page is currently NOT AVAILABLE", verifyResults);	
@@ -43,9 +45,33 @@ public class BasicTC extends TestCase{
 	{	
 
 		Utils.goToProductPage((WebDriver)driver, "32711");
-		WebElement ImageFile = driver.findElement(By.xpath("//img[@id='backImageSjElement4_img']"));
+		WebElement heroImage = driver.findElementByXPath("id('backImageSjElement4_img')");
         
-        Boolean ImagePresent = (Boolean) ((JavascriptExecutor)driver).executeScript("return arguments[0].complete && typeof arguments[0].naturalWidth != \"undefined\" && arguments[0].naturalWidth > 0", ImageFile);
-        Assert.assertTrue(ImagePresent, "Hero Image is not present on page ");
+		String source = heroImage.getAttribute("src"); 
+		Assert.assertEquals(requestSpecification.get(source).getStatusCode(), 200, "Hero Image is not being displayed");
+		
+		driver.findElementByXPath("(id('ppAlternateViews')//a)[2]").click();
+		
+		Assert.assertEquals(driver.findElementByXPath("id('backImageSjElement4_img')").getAttribute("src"), source, "Alternative View is not being displayed");
+		
+		
+		
+		
+		
+		
+		
+		//Assert.assertEquals(get(source).getStatusCode(), 200);
+		
+		
+		
+        /*Boolean ImagePresent = (Boolean) ((JavascriptExecutor)driver).executeScript("return arguments[0].complete && typeof arguments[0].naturalWidth != \"undefined\" && arguments[0].naturalWidth > 0", ImageFile);
+        Assert.assertTrue(ImagePresent, "Hero Image is not present on page ");*/
+        
+        
+        /*http://www.hascode.com/2011/10/testing-restful-web-services-made-easy-using-the-rest-assured-framework/
+        Response res = get("/service/single-user");
+        assertEquals(200, res.getStatusCode());
+        
+        */
 	}
 }
